@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 interface ScheduleDao {
 
     @Query("SELECT * FROM schedule ORDER BY arrival_time ASC")
-    fun getAllSchedulesStream(): Flow<List<BusSchedule>>
+    fun getFullScheduleStream(): Flow<List<BusSchedule>>
 
-    @Query("SELECT * FROM schedule WHERE stop_name = :stopName")
-    fun getScheduleStream(stopName: String): Flow<BusSchedule?>
+    @Query("SELECT * FROM schedule WHERE stop_name = :stopName ORDER BY arrival_time ASC")
+    fun getScheduleForStream(stopName: String): Flow<List<BusSchedule>>
 }
